@@ -36,8 +36,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: matecat
-        MYSQL_USER: matecat
-        MYSQL_PASSWORD: matecat
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
     networks:
       matecat-network:
         aliases:
