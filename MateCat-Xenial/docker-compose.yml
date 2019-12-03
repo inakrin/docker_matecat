@@ -30,12 +30,14 @@ services:
       matecat-network:
         aliases:
           - amq
-
   mysql:
-    build: ./MySQL/
     container_name: docker_mysql
-    ports:
-     - 3306:3306
+    image: mysql/mysql-server:5.7
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: matecat
+        MYSQL_USER: matecat
+        MYSQL_PASSWORD: matecat
     networks:
       matecat-network:
         aliases:
