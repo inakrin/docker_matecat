@@ -10,9 +10,8 @@ RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/apache2
-RUN apt-get update
 
-RUN apt-get -y --fix-missing install apache2 apache2-dev libapache2-mod-php5.6 librdkafka1 librdkafka-dev \
+RUN apt-get update && apt-get -y --fix-missing install apache2 apache2-dev libapache2-mod-php5.6 librdkafka1 librdkafka-dev \
     php5.6 php5.6-json php5.6-curl php5.6-xdebug php5.6-mysql php5.6-xml php5.6-mbstring php5.6-dev php5.6-mcrypt php5.6-redis \
     php5.6-zip mysql-client libzip-dev \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
@@ -75,6 +74,9 @@ COPY ./node-install.sh /tmp/node-install.sh
 RUN chmod +x /tmp/node-install.sh
 RUN /tmp/node-install.sh
 RUN rm /tmp/node-install.sh
+
+# Install Matecat
+RUN git clone --depth=1 https://github.com/matecat/MateCat.git /var/www/matecat
 
 COPY run.sh /tmp/run.sh
 RUN chmod +x /tmp/run.sh
